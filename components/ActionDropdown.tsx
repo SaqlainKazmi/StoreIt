@@ -28,7 +28,7 @@ import { usePathname } from "next/navigation";
 import {
   deleteFile,
   renameFile,
-  updateFileUser,
+  updateFileUsers,
 } from "@/lib/actions/file.actions";
 import { FileDetails, ShareInput } from "@/components/ActionModalContent";
 
@@ -54,7 +54,7 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
   const handleRemoveUser = async (email: string) => {
     const updateEmails = emails.filter((e) => e !== email);
 
-    const success = await updateFileUser({
+    const success = await updateFileUsers({
       fileId: file.$id,
       emails: updateEmails,
       path,
@@ -73,7 +73,7 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
     const actions = {
       rename: () =>
         renameFile({ fileId: file.$id, name, extension: file.extension, path }),
-      share: () => updateFileUser({ fileId: file.$id, emails, path }),
+      share: () => updateFileUsers({ fileId: file.$id, emails, path }),
       delete: () =>
         deleteFile({ fileId: file.$id, path, bucketFileId: file.bucketFileId }),
     };
